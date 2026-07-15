@@ -61,17 +61,19 @@ export const developing: DevelopingProject[] = [
   {
     icon: "🥷",
     title: "忍界大戦",
+    detail: "ターン制コマンドバトル｜Roblox",
     status: "In Development",
   },
   {
     icon: "⚡",
-    title: "電気工事 AI",
-    detail: "設計・積算・施工図作成アプリ",
+    title: "電工一発アプリ",
+    detail: "見積もり・施工図作成アプリ",
     status: "In Development",
   },
   {
     icon: "🥁",
-    title: "ドラム練習 AI",
+    title: "ドラムレッスンアプリ",
+    detail: "パラディドル・スティック回し練習",
     status: "In Development",
   },
 ];
