@@ -1,0 +1,540 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { developing, works } from "@/data/works";
+---
+
+<BaseLayout>
+  <main class="profile-page">
+    <header class="profile">
+      <a
+        class="avatar-link"
+        href="https://opensea.io/ja/komatG"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="OpenSeaのkomatGプロフィールを開く"
+      >
+        <img src="/media/avatar/komayan-space-icon.png" alt="コマやんのアイコン" width="500" height="500" />
+      </a>
+
+      <p class="handle">@komatG</p>
+      <h1>KOMAYAN</h1>
+      <p class="role">五次元探究者</p>
+      <p class="credentials">一級電気工事士<br />設計から施工まで。</p>
+      <p class="manifesto"><strong>AIと創る。</strong><strong>境界を越える。</strong></p>
+
+      <ul class="fields" aria-label="制作分野">
+        <li>ELECTRIC</li>
+        <li>GAME</li>
+        <li>WEB</li>
+        <li>AI</li>
+        <li>MUSIC</li>
+      </ul>
+
+      <p class="achievement">
+        Webサイト制作 9件 <span>（非公開）</span><br />
+        システム制作 2件 <span>（非公開）</span>
+      </p>
+    </header>
+
+    <section class="section" aria-labelledby="works-title">
+      <div class="section-heading">
+        <h2 id="works-title">Works</h2>
+        <span>{String(works.length).padStart(2, "0")}</span>
+      </div>
+
+      <div class="work-list">
+        {
+          works.map((work) => (
+            <a
+              class="work-item"
+              href={work.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${work.title}を開く`}
+            >
+              <img
+                src={work.image}
+                alt={work.imageAlt}
+                width="900"
+                height="900"
+                loading="eager"
+              />
+              <div class="work-copy">
+                <p>{work.category} / {work.status}</p>
+                <h3>{work.title}</h3>
+                <span>{work.line}</span>
+              </div>
+              <span class="work-end">
+                <span class="year">{work.year}</span>
+                <span class="work-arrow" aria-hidden="true">↗</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="developing-title">
+      <div class="section-heading">
+        <h2 id="developing-title">開発中プロジェクト</h2>
+        <span>{String(developing.length).padStart(2, "0")}</span>
+      </div>
+      <ul class="developing-list">
+        {
+          developing.map((project) => (
+            <li>
+              <span class="project-icon" aria-hidden="true">{project.icon}</span>
+              <span class="project-copy">
+                <strong>{project.title}</strong>
+                {project.detail && <small>{project.detail}</small>}
+                <em>{project.status}</em>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="content-title">
+      <div class="section-heading">
+        <h2 id="content-title">公開コンテンツ</h2>
+      </div>
+      <a class="link-item" href="https://suno.com/@katarn666" target="_blank" rel="noreferrer">
+        <span class="link-icon" aria-hidden="true">🎵</span>
+        <span class="link-copy"><strong>Suno（音楽）</strong><small>@katarn666</small></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="section" aria-labelledby="links-title">
+      <div class="section-heading">
+        <h2 id="links-title">Links</h2>
+      </div>
+      <div class="link-list">
+        <a class="link-item" href="https://opensea.io/ja/komatG" target="_blank" rel="noreferrer">
+          <img src="/media/avatar/komayan-icon.jpg" alt="" width="52" height="52" loading="lazy" />
+          <span class="link-copy"><strong>OpenSea</strong><small>komatG Profile</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="link-item" href="https://x.com/komatobideepwin" target="_blank" rel="noreferrer">
+          <span class="link-icon social-icon" aria-hidden="true">X</span>
+          <span class="link-copy"><strong>X</strong><small>@komatobideepwin</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="link-item" href="https://www.instagram.com/komatobi.eth/" target="_blank" rel="noreferrer">
+          <span class="link-icon social-icon" aria-hidden="true">IG</span>
+          <span class="link-copy"><strong>Instagram</strong><small>@komatobi.eth</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>I DON'T TALK. I BUILD.</p>
+      <span>© {new Date().getFullYear()} KOMAYAN</span>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .profile-page {
+    position: relative;
+    width: min(100% - 2rem, 680px);
+    margin: 0 auto;
+    padding: 4rem 0 2rem;
+  }
+
+  .profile-page::before {
+    content: "";
+    position: fixed;
+    top: -8rem;
+    left: 50%;
+    z-index: -1;
+    width: min(88vw, 42rem);
+    height: 18rem;
+    background: radial-gradient(ellipse, rgba(54, 231, 255, 0.18), rgba(155, 92, 255, 0.08) 45%, transparent 72%);
+    filter: blur(22px);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .avatar-link {
+    display: block;
+    width: 6.5rem;
+    aspect-ratio: 1;
+    padding: 3px;
+    border: 1px solid rgba(54, 231, 255, 0.56);
+    border-radius: 50%;
+    background: rgba(54, 231, 255, 0.08);
+    box-shadow: 0 0 26px rgba(54, 231, 255, 0.18);
+    overflow: hidden;
+    transition: transform 180ms var(--ease), border-color 180ms var(--ease);
+  }
+
+  .avatar-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--cyan);
+  }
+
+  .avatar-link img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .handle {
+    margin: 1rem 0 0.35rem;
+    color: var(--cyan);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 9vw, 3.7rem);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .role {
+    margin: 0.65rem 0 0;
+    color: var(--cyan);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .credentials {
+    margin: 1.4rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .manifesto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: 0.8rem 0 0;
+    font-size: clamp(1.05rem, 4vw, 1.22rem);
+    line-height: 1.55;
+  }
+
+  .fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem;
+    margin: 1.3rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fields li {
+    padding: 0.36rem 0.6rem;
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    font-weight: 700;
+  }
+
+  .achievement {
+    margin: 1rem 0 0;
+    color: var(--ink);
+    font-size: 0.78rem;
+    line-height: 1.8;
+  }
+
+  .achievement span {
+    color: var(--muted);
+  }
+
+  .section {
+    margin-top: 3rem;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+  }
+
+  .section-heading > span {
+    color: var(--cyan);
+    font-size: 0.66rem;
+    font-weight: 700;
+  }
+
+  .work-list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .work-item,
+  .link-item {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.055);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(14px);
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr) auto;
+    gap: 0.9rem;
+    align-items: center;
+    min-height: 6.6rem;
+    padding: 0.75rem;
+    transition: background 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
+  }
+
+  .work-item:hover,
+  .link-item:hover {
+    border-color: rgba(54, 231, 255, 0.5);
+    background: rgba(54, 231, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .work-item:focus-visible,
+  .link-item:focus-visible,
+  .avatar-link:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+
+  .work-item > img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .work-copy {
+    min-width: 0;
+  }
+
+  .work-copy p {
+    margin: 0 0 0.35rem;
+    color: var(--cyan);
+    font-size: 0.62rem;
+    font-weight: 700;
+  }
+
+  .work-copy h3 {
+    margin: 0;
+    font-size: clamp(0.94rem, 4vw, 1.1rem);
+    line-height: 1.25;
+  }
+
+  .work-copy > span {
+    display: block;
+    margin-top: 0.35rem;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .work-end {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .year {
+    color: var(--muted);
+    font-size: 0.66rem;
+  }
+
+  .work-arrow {
+    color: var(--cyan);
+    font-size: 1rem;
+  }
+
+  .developing-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 1px;
+    border-radius: var(--radius);
+    background: var(--hairline);
+    overflow: hidden;
+    list-style: none;
+  }
+
+  .developing-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-height: 5.5rem;
+    padding: 0.75rem;
+    background: #090c12;
+  }
+
+  .project-icon {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    border: 1px solid rgba(54, 231, 255, 0.24);
+    border-radius: 6px;
+    background: rgba(54, 231, 255, 0.06);
+    font-size: 1.05rem;
+  }
+
+  .project-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: 0.08rem;
+  }
+
+  .project-copy strong {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .project-copy small {
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.45;
+  }
+
+  .project-copy em {
+    color: var(--cyan);
+    font-size: 0.58rem;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .link-item {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 0.7rem;
+    transition: background 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
+  }
+
+  .link-list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .link-item img,
+  .link-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 6px;
+  }
+
+  .link-item img {
+    object-fit: cover;
+  }
+
+  .link-icon {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(54, 231, 255, 0.24);
+    background: rgba(54, 231, 255, 0.06);
+    font-size: 1.2rem;
+  }
+
+  .social-icon {
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .link-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .link-item strong {
+    font-size: 0.88rem;
+  }
+
+  .link-item small {
+    color: var(--muted);
+    font-size: 0.7rem;
+  }
+
+  .arrow {
+    color: var(--cyan);
+    font-size: 1rem;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hairline);
+    color: var(--muted);
+    font-size: 0.62rem;
+  }
+
+  footer p {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  @media (max-width: 480px) {
+    .profile-page {
+      width: min(100% - 1.5rem, 680px);
+      padding-top: 2.5rem;
+    }
+
+    .work-item {
+      grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+    }
+
+    .work-item > img {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+
+    .year {
+      display: none;
+    }
+
+    .developing-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

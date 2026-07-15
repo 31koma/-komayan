@@ -1,0 +1,30 @@
+---
+import "../styles/tokens.css";
+
+const {
+  title = "KOMAYAN | 五次元探究者",
+  description = "一級電気工事士。設計から施工まで。AIと創る。境界を越える。コマやんのポートフォリオ。",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#030407" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content="/media/avatar/komayan-icon-512.png" />
+    <link rel="icon" type="image/png" href="/media/avatar/komayan-icon-512.png" />
+    <link rel="apple-touch-icon" href="/media/avatar/apple-touch-icon.png" />
+    <link rel="canonical" href={Astro.site ?? Astro.url} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
