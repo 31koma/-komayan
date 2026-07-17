@@ -49,14 +49,14 @@ export type DevelopingProject = {
   icon: string;
   title: string;
   detail?: string;
-  status: "In Development";
+  status: "In Development" | "β版・実証実験中";
 };
 
 export const developing: DevelopingProject[] = [
   {
     icon: "🏇",
-    title: "星読み競馬 AI",
-    status: "In Development",
+    title: "星読みターフ AI",
+    status: "β版・実証実験中",
   },
   {
     icon: "🥷",
@@ -73,7 +73,19 @@ export const developing: DevelopingProject[] = [
   {
     icon: "🥁",
     title: "ドラムレッスンアプリ",
-    detail: "パラディドル・スティック回し練習",
+    detail: "パラディドル・スティックコントロール練習",
+    status: "In Development",
+  },
+  {
+    icon: "🍽️",
+    title: "個人飲食店向けAIオフィス",
+    detail: "SNS・Google・ホームページ投稿支援",
+    status: "In Development",
+  },
+  {
+    icon: "🤖",
+    title: "AIダッシュボード",
+    detail: "業務管理・AIアシスタントシステム",
     status: "In Development",
   },
 ];
