@@ -1,26 +1,27 @@
-export type WorkCategory =
-  | "Roblox"
-  | "Web"
-  | "Web App"
-  | "AI"
-  | "System"
-  | "Music"
-  | "Electric Works"
-  | "Restaurant";
-
 export type Work = {
   slug: string;
   title: string;
   year: string;
-  category: WorkCategory;
-  status: "Live" | "Developing";
-  line: string;
+  category: string;
+  status?: string;
+  line?: string;
   href: string;
   image: string;
   imageAlt: string;
+  featured?: boolean;
 };
 
 export const works: Work[] = [
+  {
+    slug: "hoshiyomi-turf",
+    title: "星読みターフ",
+    year: "2026",
+    category: "AI × 星読み競馬分析",
+    href: "https://substack.com/@komat6",
+    image: "/media/hero/hoshiyomi-turf.webp",
+    imageAlt: "星空の下の競走馬とデータ分析を描いた星読みターフのビジュアル",
+    featured: true,
+  },
   {
     slug: "glucoseman-sleep-fall",
     title: "GLUCOSEMAN SLEEP FALL",
@@ -49,15 +50,10 @@ export type DevelopingProject = {
   icon: string;
   title: string;
   detail?: string;
-  status: "In Development" | "β版・実証実験中";
+  status: "In Development";
 };
 
 export const developing: DevelopingProject[] = [
-  {
-    icon: "🏇",
-    title: "星読みターフ AI",
-    status: "β版・実証実験中",
-  },
   {
     icon: "🥷",
     title: "忍界大戦",

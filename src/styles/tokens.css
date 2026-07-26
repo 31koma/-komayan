@@ -1,21 +1,22 @@
 :root {
   color-scheme: dark;
-  --bg: #030407;
-  --ink: #f7fbff;
-  --muted: #95a3b7;
-  --hairline: rgba(255, 255, 255, 0.16);
-  --glass: rgba(255, 255, 255, 0.075);
-  --glass-strong: rgba(255, 255, 255, 0.13);
-  --cyan: #36e7ff;
-  --violet: #9b5cff;
-  --lime: #9dff6f;
-  --amber: #ffbd50;
-  --rose: #ff4f9a;
+  --bg: #02050d;
+  --surface: #07101f;
+  --surface-strong: #0a1629;
+  --ink: #f7f4e9;
+  --muted: #9aa7ba;
+  --hairline: rgba(216, 180, 97, 0.2);
+  --glass: rgba(7, 16, 31, 0.72);
+  --glass-strong: rgba(10, 22, 41, 0.9);
+  --gold: #d8b461;
+  --gold-bright: #f2d58d;
+  --cyan: #69c7d8;
+  --violet: #8784b8;
   --radius: 8px;
   --max: 1180px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --shadow-cyan: 0 0 36px rgba(54, 231, 255, 0.35);
-  --shadow-violet: 0 0 40px rgba(155, 92, 255, 0.35);
+  --shadow-gold: 0 16px 48px rgba(216, 180, 97, 0.16);
+  --shadow-cyan: 0 0 36px rgba(105, 199, 216, 0.2);
 }
 
 * {
@@ -31,9 +32,12 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 20% 10%, rgba(54, 231, 255, 0.16), transparent 34rem),
-    radial-gradient(circle at 80% 0%, rgba(255, 79, 154, 0.12), transparent 28rem),
-    linear-gradient(180deg, #05070c 0%, #030407 40%, #05070c 100%);
+    radial-gradient(circle at 18% 5%, rgba(105, 199, 216, 0.12), transparent 28rem),
+    radial-gradient(circle at 82% 0%, rgba(216, 180, 97, 0.1), transparent 24rem),
+    radial-gradient(circle at 20px 30px, rgba(247, 244, 233, 0.28) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 80px 90px, rgba(216, 180, 97, 0.24) 0 1px, transparent 1.5px),
+    linear-gradient(180deg, #030814 0%, #02050d 44%, #050a13 100%);
+  background-size: auto, auto, 120px 120px, 170px 170px, auto;
   color: var(--ink);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -60,7 +64,7 @@ video {
 }
 
 ::selection {
-  background: rgba(54, 231, 255, 0.35);
+  background: rgba(216, 180, 97, 0.34);
 }
 
 .sr-only {

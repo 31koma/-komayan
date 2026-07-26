@@ -4,39 +4,59 @@ import { developing, works } from "@/data/works";
 ---
 
 <BaseLayout>
-  <main class="profile-page">
-    <header class="profile">
-      <a
-        class="avatar-link"
-        href="https://opensea.io/ja/komatG"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="OpenSeaのkomatGプロフィールを開く"
-      >
-        <img src="/media/avatar/komayan-space-icon.png" alt="コマやんのアイコン" width="500" height="500" />
-      </a>
+  <main class="site-shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <img
+        class="hero-art"
+        src="/media/hero/hoshiyomi-turf.webp"
+        alt=""
+        width="1600"
+        height="900"
+        fetchpriority="high"
+      />
+      <div class="hero-shade" aria-hidden="true"></div>
 
-      <p class="handle">@komatG</p>
-      <h1>KOMAYAN</h1>
-      <p class="role">五次元探究者</p>
-      <p class="credentials">一級電気工事士<br />設計から施工まで。</p>
-      <p class="manifesto"><strong>AIと創る。</strong><strong>境界を越える。</strong></p>
+      <div class="hero-top">
+        <div class="identity">
+          <img
+            src="/media/avatar/komayan-space-icon.png"
+            alt="コマやんのアイコン"
+            width="500"
+            height="500"
+          />
+          <span>@komatG</span>
+        </div>
+      </div>
 
-      <ul class="fields" aria-label="制作分野">
-        <li>ELECTRIC</li>
-        <li>GAME</li>
-        <li>WEB</li>
-        <li>AI</li>
-        <li>MUSIC</li>
-      </ul>
+      <div class="hero-copy">
+        <h1 id="hero-title">KOMAYAN</h1>
+        <p class="role">星読みターフ 開発者</p>
+        <p class="catch">星と数字で、競馬を読み解く。</p>
 
-      <p class="achievement">
-        Webサイト制作 9件 <span>（非公開）</span><br />
-        システム制作 2件 <span>（非公開）</span>
-      </p>
-    </header>
+        <a
+          class="substack-cta"
+          href="https://substack.com/@komat6"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span aria-hidden="true">📩</span>
+          <strong>星読みターフを無料購読する</strong>
+          <span class="cta-arrow" aria-hidden="true">↗</span>
+        </a>
 
-    <section class="section" aria-labelledby="works-title">
+        <p class="beta-badge"><span aria-hidden="true"></span>β版公開中・毎週検証配信</p>
+
+        <ul class="fields" aria-label="星読みターフのテーマ">
+          <li>HORSE RACING</li>
+          <li>AI</li>
+          <li>ASTROLOGY</li>
+          <li>DATA</li>
+          <li>NEWSLETTER</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section works-section" aria-labelledby="works-title">
       <div class="section-heading">
         <h2 id="works-title">Works</h2>
         <span>{String(works.length).padStart(2, "0")}</span>
@@ -46,31 +66,46 @@ import { developing, works } from "@/data/works";
         {
           works.map((work) => (
             <a
-              class="work-item"
+              class:list={["work-item", { featured: work.featured }]}
               href={work.href}
               target="_blank"
               rel="noreferrer"
               aria-label={`${work.title}を開く`}
             >
-              <img
-                src={work.image}
-                alt={work.imageAlt}
-                width="900"
-                height="900"
-                loading="eager"
-              />
+              <div class="work-media">
+                <img
+                  src={work.image}
+                  alt={work.imageAlt}
+                  width="900"
+                  height="900"
+                  loading={work.featured ? "eager" : "lazy"}
+                />
+                {work.featured && <span class="featured-label">FEATURED</span>}
+              </div>
               <div class="work-copy">
-                <p>{work.category} / {work.status}</p>
-                <h3>{work.title}</h3>
-                <span>{work.line}</span>
+                <p>{work.category}</p>
+                <h3>{work.featured && <span aria-hidden="true">🏇 </span>}{work.title}</h3>
+                {work.line && <span>{work.line}</span>}
               </div>
               <span class="work-end">
-                <span class="year">{work.year}</span>
+                {work.status && <span class="status">{work.status}</span>}
                 <span class="work-arrow" aria-hidden="true">↗</span>
               </span>
             </a>
           ))
         }
+      </div>
+    </section>
+
+    <section class="section about-section" aria-labelledby="about-title">
+      <div class="section-heading">
+        <h2 id="about-title">About</h2>
+      </div>
+      <div class="about">
+        <p>
+          世界は自分がつくるシミュレーション。<br />
+          <span>星は設計図。でも全部は読めない。だから面白い。</span>
+        </p>
       </div>
     </section>
 
@@ -95,25 +130,14 @@ import { developing, works } from "@/data/works";
       </ul>
     </section>
 
-    <section class="section" aria-labelledby="content-title">
-      <div class="section-heading">
-        <h2 id="content-title">公開コンテンツ</h2>
-      </div>
-      <a class="link-item" href="https://suno.com/@katarn666" target="_blank" rel="noreferrer">
-        <span class="link-icon" aria-hidden="true">🎵</span>
-        <span class="link-copy"><strong>Suno（音楽）</strong><small>@katarn666</small></span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-    </section>
-
     <section class="section" aria-labelledby="links-title">
       <div class="section-heading">
-        <h2 id="links-title">Links</h2>
+        <h2 id="links-title">Follow</h2>
       </div>
       <div class="link-list">
-        <a class="link-item" href="https://opensea.io/ja/komatG" target="_blank" rel="noreferrer">
-          <img src="/media/avatar/komayan-icon.jpg" alt="" width="52" height="52" loading="lazy" />
-          <span class="link-copy"><strong>OpenSea</strong><small>komatG Profile</small></span>
+        <a class="link-item newsletter-link" href="https://substack.com/@komat6" target="_blank" rel="noreferrer">
+          <span class="link-icon" aria-hidden="true">✦</span>
+          <span class="link-copy"><strong>Substack</strong><small>無料ニュースレター</small></span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
         <a class="link-item" href="https://x.com/komatobideepwin" target="_blank" rel="noreferrer">
@@ -130,135 +154,203 @@ import { developing, works } from "@/data/works";
     </section>
 
     <footer>
-      <p>I DON'T TALK. I BUILD.</p>
+      <p>HOSHIYOMI TURF</p>
       <span>© {new Date().getFullYear()} KOMAYAN</span>
     </footer>
   </main>
 </BaseLayout>
 
 <style>
-  .profile-page {
-    position: relative;
-    width: min(100% - 2rem, 680px);
+  .site-shell {
+    width: min(100% - 2rem, 760px);
     margin: 0 auto;
-    padding: 4rem 0 2rem;
+    padding: 1rem 0 2rem;
   }
 
-  .profile-page::before {
+  .hero {
+    position: relative;
+    min-height: min(740px, calc(100svh - 2rem));
+    border: 1px solid rgba(216, 180, 97, 0.25);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48), var(--shadow-gold);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-art,
+  .hero-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-art {
+    z-index: -3;
+    object-fit: cover;
+    object-position: 54% center;
+    transform: scale(1.015);
+    animation: hero-drift 18s ease-in-out infinite alternate;
+  }
+
+  .hero-shade {
+    z-index: -2;
+    background:
+      linear-gradient(180deg, rgba(2, 5, 13, 0.22) 0%, rgba(2, 5, 13, 0.1) 30%, rgba(2, 5, 13, 0.92) 76%, #02050d 100%),
+      linear-gradient(90deg, rgba(2, 5, 13, 0.9) 0%, rgba(2, 5, 13, 0.46) 50%, rgba(2, 5, 13, 0.1) 100%);
+  }
+
+  .hero::after {
     content: "";
-    position: fixed;
-    top: -8rem;
-    left: 50%;
+    position: absolute;
+    inset: 0;
     z-index: -1;
-    width: min(88vw, 42rem);
-    height: 18rem;
-    background: radial-gradient(ellipse, rgba(54, 231, 255, 0.18), rgba(155, 92, 255, 0.08) 45%, transparent 72%);
-    filter: blur(22px);
-    transform: translateX(-50%);
+    border: 1px solid rgba(247, 244, 233, 0.04);
+    border-radius: inherit;
     pointer-events: none;
   }
 
-  .profile {
+  .hero-top {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
   }
 
-  .avatar-link {
-    display: block;
-    width: 6.5rem;
-    aspect-ratio: 1;
-    padding: 3px;
-    border: 1px solid rgba(54, 231, 255, 0.56);
-    border-radius: 50%;
-    background: rgba(54, 231, 255, 0.08);
-    box-shadow: 0 0 26px rgba(54, 231, 255, 0.18);
-    overflow: hidden;
-    transition: transform 180ms var(--ease), border-color 180ms var(--ease);
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 700;
   }
 
-  .avatar-link:hover {
-    transform: translateY(-2px);
-    border-color: var(--cyan);
-  }
-
-  .avatar-link img {
-    width: 100%;
-    height: 100%;
+  .identity img {
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 1px solid rgba(242, 213, 141, 0.6);
     border-radius: 50%;
     object-fit: cover;
+    box-shadow: 0 0 0 3px rgba(2, 5, 13, 0.48);
   }
 
-  .handle {
-    margin: 1rem 0 0.35rem;
-    color: var(--cyan);
-    font-size: 0.78rem;
-    font-weight: 700;
+  .hero-copy {
+    position: absolute;
+    left: clamp(1.25rem, 5vw, 2.75rem);
+    right: clamp(1.25rem, 5vw, 2.75rem);
+    bottom: clamp(1.5rem, 5vw, 2.75rem);
+    width: min(100% - 2.5rem, 31rem);
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2.2rem, 9vw, 3.7rem);
-    line-height: 1;
-    letter-spacing: 0;
+    font-size: clamp(2.75rem, 10vw, 5.2rem);
+    line-height: 0.94;
+    text-wrap: balance;
   }
 
   .role {
-    margin: 0.65rem 0 0;
-    color: var(--cyan);
-    font-size: 0.92rem;
+    margin: 0.75rem 0 0;
+    color: var(--gold-bright);
+    font-size: clamp(0.92rem, 2.8vw, 1.08rem);
     font-weight: 700;
   }
 
-  .credentials {
-    margin: 1.4rem 0 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.75;
+  .catch {
+    margin: 0.45rem 0 0;
+    color: var(--ink);
+    font-size: clamp(1.15rem, 4vw, 1.6rem);
+    font-weight: 650;
+    line-height: 1.45;
   }
 
-  .manifesto {
+  .substack-cta {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.7rem;
+    align-items: center;
+    width: 100%;
+    min-height: 3.7rem;
+    margin-top: 1.35rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--gold-bright);
+    border-radius: 6px;
+    background: linear-gradient(135deg, #f2d58d 0%, #c99b3c 100%);
+    box-shadow: 0 14px 40px rgba(216, 180, 97, 0.32);
+    color: #10100d;
+    transition: transform 180ms var(--ease), box-shadow 180ms var(--ease), filter 180ms var(--ease);
+  }
+
+  .substack-cta:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 18px 48px rgba(216, 180, 97, 0.42);
+    transform: translateY(-2px);
+  }
+
+  .substack-cta strong {
+    font-size: clamp(0.9rem, 3.2vw, 1.02rem);
+    text-align: center;
+  }
+
+  .cta-arrow {
+    font-size: 1.05rem;
+  }
+
+  .beta-badge {
     display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+    align-items: center;
+    gap: 0.5rem;
+    width: max-content;
+    max-width: 100%;
     margin: 0.8rem 0 0;
-    font-size: clamp(1.05rem, 4vw, 1.22rem);
-    line-height: 1.55;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid rgba(216, 180, 97, 0.28);
+    border-radius: 999px;
+    background: rgba(2, 5, 13, 0.68);
+    color: rgba(247, 244, 233, 0.82);
+    font-size: 0.68rem;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+  }
+
+  .beta-badge span {
+    width: 0.42rem;
+    height: 0.42rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 12px rgba(242, 213, 141, 0.8);
   }
 
   .fields {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.45rem;
-    margin: 1.3rem 0 0;
+    gap: 0.4rem;
+    margin: 1rem 0 0;
     padding: 0;
     list-style: none;
   }
 
   .fields li {
-    padding: 0.36rem 0.6rem;
-    border: 1px solid var(--hairline);
-    border-radius: 4px;
-    color: var(--muted);
-    font-size: 0.67rem;
-    font-weight: 700;
-  }
-
-  .achievement {
-    margin: 1rem 0 0;
-    color: var(--ink);
-    font-size: 0.78rem;
-    line-height: 1.8;
-  }
-
-  .achievement span {
-    color: var(--muted);
+    padding: 0.28rem 0.48rem;
+    border: 1px solid rgba(105, 199, 216, 0.2);
+    border-radius: 3px;
+    background: rgba(3, 8, 20, 0.68);
+    color: #b6dbe2;
+    font-size: 0.57rem;
+    font-weight: 750;
+    backdrop-filter: blur(8px);
   }
 
   .section {
     margin-top: 3rem;
+  }
+
+  .works-section {
+    scroll-margin-top: 1rem;
   }
 
   .section-heading {
@@ -266,31 +358,33 @@ import { developing, works } from "@/data/works";
     align-items: baseline;
     justify-content: space-between;
     margin-bottom: 0.8rem;
+    padding: 0 0.15rem;
   }
 
   .section-heading h2 {
     margin: 0;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
   }
 
   .section-heading > span {
-    color: var(--cyan);
+    color: var(--gold);
     font-size: 0.66rem;
     font-weight: 700;
   }
 
-  .work-list {
+  .work-list,
+  .link-list {
     display: grid;
     gap: 0.7rem;
   }
 
   .work-item,
   .link-item {
-    border: 1px solid var(--hairline);
+    border: 1px solid rgba(247, 244, 233, 0.11);
     border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.055);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
+    background: var(--glass);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.24);
     backdrop-filter: blur(14px);
   }
 
@@ -304,25 +398,63 @@ import { developing, works } from "@/data/works";
     transition: background 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
   }
 
+  .work-item.featured {
+    grid-template-columns: minmax(12rem, 1.08fr) minmax(0, 1fr) auto;
+    min-height: 12rem;
+    border-color: rgba(216, 180, 97, 0.52);
+    background: linear-gradient(135deg, rgba(216, 180, 97, 0.1), rgba(7, 16, 31, 0.84));
+    box-shadow: var(--shadow-gold);
+  }
+
   .work-item:hover,
   .link-item:hover {
-    border-color: rgba(54, 231, 255, 0.5);
-    background: rgba(54, 231, 255, 0.08);
+    border-color: rgba(216, 180, 97, 0.54);
+    background: rgba(216, 180, 97, 0.08);
     transform: translateY(-2px);
   }
 
   .work-item:focus-visible,
   .link-item:focus-visible,
-  .avatar-link:focus-visible {
-    outline: 2px solid var(--cyan);
+  .substack-cta:focus-visible {
+    outline: 2px solid var(--gold-bright);
     outline-offset: 3px;
   }
 
-  .work-item > img {
+  .work-media {
+    position: relative;
     width: 5rem;
     height: 5rem;
     border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .work-media img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+  }
+
+  .featured .work-media {
+    width: 100%;
+    height: 100%;
+    min-height: 10rem;
+  }
+
+  .featured .work-media img {
+    object-position: 67% center;
+  }
+
+  .featured-label {
+    position: absolute;
+    top: 0.55rem;
+    left: 0.55rem;
+    padding: 0.25rem 0.42rem;
+    border: 1px solid rgba(242, 213, 141, 0.55);
+    border-radius: 3px;
+    background: rgba(2, 5, 13, 0.78);
+    color: var(--gold-bright);
+    font-size: 0.52rem;
+    font-weight: 800;
   }
 
   .work-copy {
@@ -331,7 +463,7 @@ import { developing, works } from "@/data/works";
 
   .work-copy p {
     margin: 0 0 0.35rem;
-    color: var(--cyan);
+    color: var(--gold);
     font-size: 0.62rem;
     font-weight: 700;
   }
@@ -342,14 +474,16 @@ import { developing, works } from "@/data/works";
     line-height: 1.25;
   }
 
+  .featured .work-copy h3 {
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+  }
+
   .work-copy > span {
     display: block;
-    margin-top: 0.35rem;
-    overflow: hidden;
+    margin-top: 0.4rem;
     color: var(--muted);
     font-size: 0.72rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.45;
   }
 
   .work-end {
@@ -358,16 +492,49 @@ import { developing, works } from "@/data/works";
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+    gap: 0.5rem;
   }
 
-  .year {
+  .status {
+    max-width: 5.8rem;
     color: var(--muted);
-    font-size: 0.66rem;
+    font-size: 0.59rem;
+    line-height: 1.35;
+    text-align: right;
+  }
+
+  .featured .status,
+  .work-arrow {
+    color: var(--gold-bright);
+  }
+
+  .work-arrow,
+  .arrow {
+    font-size: 1rem;
   }
 
   .work-arrow {
-    color: var(--cyan);
-    font-size: 1rem;
+    margin-top: auto;
+  }
+
+  .about {
+    padding: 1rem;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .about p {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(0.98rem, 3.5vw, 1.12rem);
+    font-weight: 650;
+    line-height: 1.8;
+  }
+
+  .about p span {
+    color: var(--muted);
+    font-size: 0.88em;
+    font-weight: 500;
   }
 
   .developing-list {
@@ -377,7 +544,7 @@ import { developing, works } from "@/data/works";
     margin: 0;
     padding: 1px;
     border-radius: var(--radius);
-    background: var(--hairline);
+    background: rgba(216, 180, 97, 0.18);
     overflow: hidden;
     list-style: none;
   }
@@ -386,20 +553,24 @@ import { developing, works } from "@/data/works";
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    min-height: 5.5rem;
-    padding: 0.75rem;
-    background: #090c12;
+    min-height: 5.8rem;
+    padding: 0.8rem;
+    background: #060d19;
+  }
+
+  .project-icon,
+  .link-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 1px solid rgba(216, 180, 97, 0.25);
+    border-radius: 6px;
+    background: rgba(216, 180, 97, 0.06);
   }
 
   .project-icon {
-    display: grid;
-    place-items: center;
     width: 2.25rem;
     height: 2.25rem;
-    flex: 0 0 auto;
-    border: 1px solid rgba(54, 231, 255, 0.24);
-    border-radius: 6px;
-    background: rgba(54, 231, 255, 0.06);
     font-size: 1.05rem;
   }
 
@@ -438,27 +609,14 @@ import { developing, works } from "@/data/works";
     transition: background 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
   }
 
-  .link-list {
-    display: grid;
-    gap: 0.7rem;
+  .newsletter-link {
+    border-color: rgba(216, 180, 97, 0.34);
   }
 
-  .link-item img,
   .link-icon {
     width: 3.25rem;
     height: 3.25rem;
-    border-radius: 6px;
-  }
-
-  .link-item img {
-    object-fit: cover;
-  }
-
-  .link-icon {
-    display: grid;
-    place-items: center;
-    border: 1px solid rgba(54, 231, 255, 0.24);
-    background: rgba(54, 231, 255, 0.06);
+    color: var(--gold-bright);
     font-size: 1.2rem;
   }
 
@@ -470,22 +628,25 @@ import { developing, works } from "@/data/works";
 
   .link-copy {
     display: flex;
+    min-width: 0;
     flex-direction: column;
     gap: 0.2rem;
   }
 
-  .link-item strong {
+  .link-copy strong {
     font-size: 0.88rem;
   }
 
-  .link-item small {
+  .link-copy small {
+    overflow: hidden;
     color: var(--muted);
     font-size: 0.7rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .arrow {
-    color: var(--cyan);
-    font-size: 1rem;
+    color: var(--gold-bright);
   }
 
   footer {
@@ -493,7 +654,7 @@ import { developing, works } from "@/data/works";
     justify-content: space-between;
     gap: 1rem;
     margin-top: 4rem;
-    padding-top: 1.25rem;
+    padding: 1.25rem 0.15rem 0;
     border-top: 1px solid var(--hairline);
     color: var(--muted);
     font-size: 0.62rem;
@@ -505,27 +666,110 @@ import { developing, works } from "@/data/works";
     font-weight: 700;
   }
 
-  @media (max-width: 480px) {
-    .profile-page {
-      width: min(100% - 1.5rem, 680px);
-      padding-top: 2.5rem;
+  @keyframes hero-drift {
+    from {
+      transform: scale(1.015);
+    }
+    to {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-shell {
+      width: min(100% - 1rem, 760px);
+      padding-top: 0.5rem;
     }
 
-    .work-item {
-      grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+    .hero {
+      min-height: min(680px, calc(100svh - 1rem));
     }
 
-    .work-item > img {
-      width: 4.5rem;
-      height: 4.5rem;
+    .hero-art {
+      object-position: 62% center;
     }
 
-    .year {
-      display: none;
+    .hero-shade {
+      background:
+        linear-gradient(180deg, rgba(2, 5, 13, 0.12) 0%, rgba(2, 5, 13, 0.34) 34%, rgba(2, 5, 13, 0.96) 70%, #02050d 100%),
+        linear-gradient(90deg, rgba(2, 5, 13, 0.7), rgba(2, 5, 13, 0.12));
+    }
+
+    .hero-top {
+      padding: 0.75rem;
+    }
+
+    .hero-copy {
+      bottom: 1.2rem;
+      left: 1rem;
+      right: 1rem;
+      width: auto;
+    }
+
+    h1 {
+      font-size: clamp(2.65rem, 14vw, 4rem);
+    }
+
+    .substack-cta {
+      min-height: 3.8rem;
+      margin-top: 1rem;
+    }
+
+    .section {
+      margin-top: 2.5rem;
+    }
+
+    .work-item.featured {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.85rem;
+    }
+
+    .featured .work-media {
+      grid-column: 1 / -1;
+      width: 100%;
+      min-height: 0;
+      aspect-ratio: 16 / 8.5;
+    }
+
+    .featured .work-end {
+      grid-column: 2;
     }
 
     .developing-list {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .hero {
+      min-height: 650px;
+    }
+
+    .fields {
+      gap: 0.3rem;
+    }
+
+    .fields li {
+      font-size: 0.53rem;
+    }
+
+    .work-item:not(.featured) {
+      grid-template-columns: 4.25rem minmax(0, 1fr) auto;
+      gap: 0.7rem;
+    }
+
+    .work-item:not(.featured) .work-media {
+      width: 4.25rem;
+      height: 4.25rem;
+    }
+
+    .status {
+      display: none;
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 0.35rem;
     }
   }
 
@@ -535,6 +779,8 @@ import { developing, works } from "@/data/works";
     *::after {
       scroll-behavior: auto !important;
       transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
     }
   }
 </style>
