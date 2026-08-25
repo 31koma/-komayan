@@ -11,17 +11,31 @@ export type Work = {
   featured?: boolean;
 };
 
-export const works: Work[] = [
+export type MusicVideo = {
+  title: string;
+  channel: string;
+  status: string;
+  line: string;
+  href: string;
+  channelHref: string;
+  youtubeId: string;
+  image: string;
+};
+
+export const musicVideos: MusicVideo[] = [
   {
-    slug: "hoshiyomi-turf",
-    title: "星読みターフ",
-    year: "2026",
-    category: "AI × 星読み競馬分析",
-    href: "https://substack.com/@komat6",
-    image: "/media/hero/hoshiyomi-turf.webp",
-    imageAlt: "星空の下の競走馬とデータ分析を描いた星読みターフのビジュアル",
-    featured: true,
+    title: "気づけば 空を見ていた",
+    channel: "量子論 イズナ",
+    status: "DEBUT MUSIC VIDEO",
+    line: "イズナと音楽、AI映像で描くMVプロジェクトの第一作。",
+    href: "https://youtu.be/1isSEkwXdgw",
+    channelHref: "https://www.youtube.com/@izuna-6",
+    youtubeId: "1isSEkwXdgw",
+    image: "/media/works/izuna-kizukeba-sora.jpg",
   },
+];
+
+export const works: Work[] = [
   {
     slug: "glucoseman-sleep-fall",
     title: "GLUCOSEMAN SLEEP FALL",
@@ -43,45 +57,5 @@ export const works: Work[] = [
     href: "https://ro.blox.com/Ebh5?af_dp=roblox%3A%2F%2Fnavigation%2Fgame_details%3FgameId%3D10331945057&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fgames%2F72226810332759",
     image: "/media/works/glucoseman-labyrinth.jpg",
     imageAlt: "グルコースマン ラビリンスのゲーム画像",
-  },
-];
-
-export type DevelopingProject = {
-  icon: string;
-  title: string;
-  detail?: string;
-  status: "In Development";
-};
-
-export const developing: DevelopingProject[] = [
-  {
-    icon: "🥷",
-    title: "忍界大戦",
-    detail: "ターン制コマンドバトル｜Roblox",
-    status: "In Development",
-  },
-  {
-    icon: "⚡",
-    title: "電工一発アプリ",
-    detail: "見積もり・施工図作成アプリ",
-    status: "In Development",
-  },
-  {
-    icon: "🥁",
-    title: "ドラムレッスンアプリ",
-    detail: "パラディドル・スティックコントロール練習",
-    status: "In Development",
-  },
-  {
-    icon: "🍽️",
-    title: "個人飲食店向けAIオフィス",
-    detail: "SNS・Google・ホームページ投稿支援",
-    status: "In Development",
-  },
-  {
-    icon: "🤖",
-    title: "AIダッシュボード",
-    detail: "業務管理・AIアシスタントシステム",
-    status: "In Development",
   },
 ];

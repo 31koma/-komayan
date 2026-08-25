@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { developing, works } from "@/data/works";
+import { musicVideos, works } from "@/data/works";
 ---
 
 <BaseLayout>
@@ -30,8 +30,8 @@ import { developing, works } from "@/data/works";
 
       <div class="hero-copy">
         <h1 id="hero-title">KOMAYAN</h1>
-        <p class="role">星読みターフ 開発者</p>
-        <p class="catch">星と数字で、競馬を読み解く。</p>
+        <p class="role">AI CREATOR / MUSIC & WORLDS</p>
+        <p class="catch">星と数字、音楽と物語。<br />AIで、まだない世界をつくる。</p>
 
         <a
           class="substack-cta"
@@ -51,9 +51,64 @@ import { developing, works } from "@/data/works";
           <li>AI</li>
           <li>ASTROLOGY</li>
           <li>DATA</li>
+          <li>MUSIC VIDEO</li>
           <li>NEWSLETTER</li>
         </ul>
       </div>
+    </section>
+
+    <section class="section mv-section" aria-labelledby="mv-title">
+      <div class="section-heading">
+        <h2 id="mv-title">Music Video</h2>
+        <span>{String(musicVideos.length).padStart(2, "0")}</span>
+      </div>
+
+      {
+        musicVideos.map((video) => (
+          <article class="mv-feature">
+            <div class="mv-video" style={`--mv-poster: url("${video.image}")`}>
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
+                title={`${video.channel}「${video.title}」ミュージックビデオ`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              />
+            </div>
+
+            <div class="mv-body">
+              <div class="mv-intro">
+                <p class="mv-status"><span aria-hidden="true" />{video.status}</p>
+                <p class="mv-channel">YOUTUBE CHANNEL</p>
+                <h3>{video.channel}</h3>
+                <p class="mv-concept">イズナが歌い、世界を旅する。</p>
+                <p class="mv-description">
+                  キャラクター「イズナ」を主人公に、音楽と映像でひとつの世界を描くプロジェクト。
+                  これから新しいMVを重ねていきます。
+                </p>
+              </div>
+
+              <div class="mv-release">
+                <div>
+                  <small>1ST MUSIC VIDEO</small>
+                  <strong>『{video.title}』</strong>
+                  <p>{video.line}</p>
+                </div>
+                <div class="mv-actions">
+                  <a class="mv-primary" href={video.href} target="_blank" rel="noreferrer">
+                    <span aria-hidden="true">▶</span>
+                    YouTubeで観る
+                  </a>
+                  <a class="mv-secondary" href={video.channelHref} target="_blank" rel="noreferrer">
+                    チャンネルを見る <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
     </section>
 
     <section class="section works-section" aria-labelledby="works-title">
@@ -104,30 +159,9 @@ import { developing, works } from "@/data/works";
       <div class="about">
         <p>
           世界は自分がつくるシミュレーション。<br />
-          <span>星は設計図。でも全部は読めない。だから面白い。</span>
+          <span>星を読み、ゲームをつくり、イズナの歌う世界を映像にする。AIと一緒に、まだ名前のない作品を形にしています。</span>
         </p>
       </div>
-    </section>
-
-    <section class="section" aria-labelledby="developing-title">
-      <div class="section-heading">
-        <h2 id="developing-title">開発中プロジェクト</h2>
-        <span>{String(developing.length).padStart(2, "0")}</span>
-      </div>
-      <ul class="developing-list">
-        {
-          developing.map((project) => (
-            <li>
-              <span class="project-icon" aria-hidden="true">{project.icon}</span>
-              <span class="project-copy">
-                <strong>{project.title}</strong>
-                {project.detail && <small>{project.detail}</small>}
-                <em>{project.status}</em>
-              </span>
-            </li>
-          ))
-        }
-      </ul>
     </section>
 
     <section class="section" aria-labelledby="links-title">
@@ -138,6 +172,11 @@ import { developing, works } from "@/data/works";
         <a class="link-item newsletter-link" href="https://substack.com/@komat6" target="_blank" rel="noreferrer">
           <span class="link-icon" aria-hidden="true">✦</span>
           <span class="link-copy"><strong>Substack</strong><small>無料ニュースレター</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="link-item youtube-link" href="https://www.youtube.com/@izuna-6" target="_blank" rel="noreferrer">
+          <span class="link-icon youtube-icon" aria-hidden="true">▶</span>
+          <span class="link-copy"><strong>YouTube</strong><small>量子論 イズナ</small></span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
         <a class="link-item" href="https://x.com/komatobideepwin" target="_blank" rel="noreferrer">
@@ -154,7 +193,7 @@ import { developing, works } from "@/data/works";
     </section>
 
     <footer>
-      <p>HOSHIYOMI TURF</p>
+      <p>KOMAYAN / QUANTUM THEORY IZUNA</p>
       <span>© {new Date().getFullYear()} KOMAYAN</span>
     </footer>
   </main>
@@ -373,6 +412,173 @@ import { developing, works } from "@/data/works";
     font-weight: 700;
   }
 
+  .mv-feature {
+    position: relative;
+    border: 1px solid rgba(163, 204, 224, 0.25);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(circle at 12% 0%, rgba(105, 199, 216, 0.18), transparent 19rem),
+      linear-gradient(145deg, rgba(6, 13, 25, 0.96), rgba(2, 5, 13, 0.98));
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.42), var(--shadow-cyan);
+    overflow: hidden;
+  }
+
+  .mv-feature::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(247, 244, 233, 0.025);
+    pointer-events: none;
+  }
+
+  .mv-video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000 var(--mv-poster) center / cover no-repeat;
+    overflow: hidden;
+  }
+
+  .mv-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .mv-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(15rem, 0.92fr);
+    gap: 2rem;
+    padding: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  .mv-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.2rem;
+    color: #db7d7d;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .mv-status span {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #d04d4d;
+    box-shadow: 0 0 15px rgba(208, 77, 77, 0.9);
+  }
+
+  .mv-channel,
+  .mv-release small {
+    margin: 0;
+    color: var(--cyan);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .mv-intro h3 {
+    margin: 0.35rem 0 0;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: clamp(1.85rem, 7vw, 3rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.12;
+  }
+
+  .mv-concept {
+    margin: 1rem 0 0;
+    color: var(--ink);
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    letter-spacing: 0.03em;
+  }
+
+  .mv-description {
+    margin: 0.7rem 0 0;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.8;
+  }
+
+  .mv-release {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1.2rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(105, 199, 216, 0.18);
+  }
+
+  .mv-release strong {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .mv-release p {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.7rem;
+    line-height: 1.55;
+  }
+
+  .mv-actions {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .mv-primary,
+  .mv-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    transition: transform 180ms var(--ease), background 180ms var(--ease), border-color 180ms var(--ease);
+  }
+
+  .mv-primary {
+    gap: 0.6rem;
+    background: #d44343;
+    color: #fff;
+  }
+
+  .mv-secondary {
+    gap: 0.45rem;
+    border: 1px solid rgba(247, 244, 233, 0.18);
+    color: var(--ink);
+  }
+
+  .mv-primary:hover,
+  .mv-secondary:hover {
+    transform: translateY(-2px);
+  }
+
+  .mv-primary:hover {
+    background: #e04b4b;
+  }
+
+  .mv-secondary:hover {
+    border-color: rgba(105, 199, 216, 0.5);
+    background: rgba(105, 199, 216, 0.08);
+  }
+
+  .mv-primary:focus-visible,
+  .mv-secondary:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
+  }
+
   .work-list,
   .link-list {
     display: grid;
@@ -537,28 +743,6 @@ import { developing, works } from "@/data/works";
     font-weight: 500;
   }
 
-  .developing-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    margin: 0;
-    padding: 1px;
-    border-radius: var(--radius);
-    background: rgba(216, 180, 97, 0.18);
-    overflow: hidden;
-    list-style: none;
-  }
-
-  .developing-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    min-height: 5.8rem;
-    padding: 0.8rem;
-    background: #060d19;
-  }
-
-  .project-icon,
   .link-icon {
     display: grid;
     place-items: center;
@@ -566,38 +750,6 @@ import { developing, works } from "@/data/works";
     border: 1px solid rgba(216, 180, 97, 0.25);
     border-radius: 6px;
     background: rgba(216, 180, 97, 0.06);
-  }
-
-  .project-icon {
-    width: 2.25rem;
-    height: 2.25rem;
-    font-size: 1.05rem;
-  }
-
-  .project-copy {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding-top: 0.08rem;
-  }
-
-  .project-copy strong {
-    font-size: 0.82rem;
-    line-height: 1.35;
-  }
-
-  .project-copy small {
-    color: var(--muted);
-    font-size: 0.67rem;
-    line-height: 1.45;
-  }
-
-  .project-copy em {
-    color: var(--cyan);
-    font-size: 0.58rem;
-    font-style: normal;
-    font-weight: 700;
   }
 
   .link-item {
@@ -611,6 +763,17 @@ import { developing, works } from "@/data/works";
 
   .newsletter-link {
     border-color: rgba(216, 180, 97, 0.34);
+  }
+
+  .youtube-link {
+    border-color: rgba(212, 67, 67, 0.42);
+  }
+
+  .youtube-icon {
+    border-color: rgba(212, 67, 67, 0.46);
+    background: rgba(212, 67, 67, 0.12);
+    color: #f08a8a;
+    font-size: 0.8rem;
   }
 
   .link-icon {
@@ -719,6 +882,18 @@ import { developing, works } from "@/data/works";
       margin-top: 2.5rem;
     }
 
+    .mv-body {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .mv-release {
+      padding-top: 1.25rem;
+      padding-left: 0;
+      border-top: 1px solid rgba(105, 199, 216, 0.18);
+      border-left: 0;
+    }
+
     .work-item.featured {
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 0.85rem;
@@ -735,9 +910,6 @@ import { developing, works } from "@/data/works";
       grid-column: 2;
     }
 
-    .developing-list {
-      grid-template-columns: 1fr;
-    }
   }
 
   @media (max-width: 390px) {

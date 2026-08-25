@@ -2,8 +2,8 @@
 import "../styles/tokens.css";
 
 const {
-  title = "KOMAYAN | 星読みターフ 開発者",
-  description = "星と数字で、競馬を読み解く。AIで競馬を研究・検証し、星読みターフの検証結果を毎週配信しています。",
+  title = "KOMAYAN | 星・AI・音楽で世界をつくる",
+  description = "星読みターフ、ゲーム、そしてキャラクター・イズナの音楽と映像。AIとともに、まだない世界を形にするKOMAYANのポートフォリオ。",
   image = "/og.png",
 } = Astro.props;
 
@@ -22,7 +22,7 @@ const socialImage = Astro.site ? new URL(image, Astro.site).toString() : image;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
-    <meta property="og:site_name" content="星読みターフ" />
+    <meta property="og:site_name" content="KOMAYAN" />
     <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
