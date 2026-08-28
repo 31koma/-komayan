@@ -30,8 +30,8 @@ import { musicVideos, works } from "@/data/works";
 
       <div class="hero-copy">
         <h1 id="hero-title">KOMAYAN</h1>
-        <p class="role">AI CREATOR / MUSIC & WORLDS</p>
-        <p class="catch">星と数字、音楽と物語。<br />AIで、まだない世界をつくる。</p>
+        <p class="role">HORSE RACING FORECAST APP / AI CREATOR</p>
+        <p class="catch">理論とデータを軸に予想する。<br />誕生日から、馬の素質と運気まで見る。</p>
 
         <a
           class="substack-cta"
@@ -40,20 +40,49 @@ import { musicVideos, works } from "@/data/works";
           rel="noreferrer"
         >
           <span aria-hidden="true">📩</span>
-          <strong>星読みターフを無料購読する</strong>
+          <strong>星読みターフの予想を読む</strong>
           <span class="cta-arrow" aria-hidden="true">↗</span>
         </a>
 
         <p class="beta-badge"><span aria-hidden="true"></span>β版公開中・毎週検証配信</p>
 
-        <ul class="fields" aria-label="星読みターフのテーマ">
+        <ul class="fields" aria-label="KOMAYANのテーマ">
           <li>HORSE RACING</li>
-          <li>AI</li>
-          <li>ASTROLOGY</li>
+          <li>THEORY</li>
           <li>DATA</li>
+          <li>BIRTHDAY</li>
+          <li>AI</li>
           <li>MUSIC VIDEO</li>
-          <li>NEWSLETTER</li>
         </ul>
+      </div>
+    </section>
+
+    <section class="section turf-section" aria-labelledby="turf-title">
+      <div class="section-heading">
+        <h2>星読みターフ</h2>
+        <span>01</span>
+      </div>
+
+      <div class="turf-panel">
+        <p class="turf-kicker">RACING FORECAST APP</p>
+        <h3 id="turf-title">8割は理論。誕生日から、素質と運気も見る。</h3>
+        <p class="turf-lead">
+          星読みターフは、データと独自理論を軸にした競馬予想アプリです。
+          そこに誕生日から見る馬の素質と、レース時の運気を加えて予想します。
+        </p>
+
+        <ul class="turf-points">
+          <li><strong>理論 80%</strong><span>データと独自理論を、予想の中心に置く。</span></li>
+          <li><strong>素質</strong><span>誕生日から、その馬が持つ力の傾向を見る。</span></li>
+          <li><strong>運気</strong><span>誕生日をもとに、レース時の流れも見る。</span></li>
+        </ul>
+
+        <div class="turf-bottom">
+          <p>現在はβ版として予想と検証を無料配信中。今後、予想販売へ移行します。</p>
+          <a href="https://substack.com/@komat6" target="_blank" rel="noreferrer">
+            β版を無料購読する <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -251,7 +280,7 @@ import { musicVideos, works } from "@/data/works";
     align-items: center;
     gap: 0.65rem;
     color: var(--ink);
-    font-size: 0.72rem;
+    font-size: 12px;
     font-weight: 700;
   }
 
@@ -323,7 +352,7 @@ import { musicVideos, works } from "@/data/works";
   }
 
   .cta-arrow {
-    font-size: 1.05rem;
+    font-size: 16.3px;
   }
 
   .beta-badge {
@@ -336,9 +365,9 @@ import { musicVideos, works } from "@/data/works";
     padding: 0.35rem 0.6rem;
     border: 1px solid rgba(216, 180, 97, 0.28);
     border-radius: 999px;
-    background: rgba(2, 5, 13, 0.68);
+    background: #10100d;
     color: rgba(247, 244, 233, 0.82);
-    font-size: 0.68rem;
+    font-size: 12px;
     font-weight: 700;
     backdrop-filter: blur(10px);
   }
@@ -347,7 +376,7 @@ import { musicVideos, works } from "@/data/works";
     width: 0.42rem;
     height: 0.42rem;
     flex: 0 0 auto;
-    border-radius: 50%;
+    border-radius: 6px;
     background: var(--gold-bright);
     box-shadow: 0 0 12px rgba(242, 213, 141, 0.8);
   }
@@ -364,10 +393,10 @@ import { musicVideos, works } from "@/data/works";
   .fields li {
     padding: 0.28rem 0.48rem;
     border: 1px solid rgba(105, 199, 216, 0.2);
-    border-radius: 3px;
-    background: rgba(3, 8, 20, 0.68);
-    color: #b6dbe2;
-    font-size: 0.57rem;
+    border-radius: 6px;
+    background: var(--surface);
+    color: #a3cce0;
+    font-size: 12px;
     font-weight: 750;
     backdrop-filter: blur(8px);
   }
@@ -396,8 +425,125 @@ import { musicVideos, works } from "@/data/works";
 
   .section-heading > span {
     color: var(--gold);
-    font-size: 0.66rem;
+    font-size: 12px;
     font-weight: 700;
+  }
+
+  .turf-section {
+    scroll-margin-top: 1rem;
+  }
+
+  .turf-panel {
+    padding: clamp(1.25rem, 5vw, 2rem);
+    border-top: 1px solid rgba(105, 199, 216, 0.4);
+    border-bottom: 1px solid rgba(105, 199, 216, 0.24);
+    background:
+      radial-gradient(circle at 8% 0%, rgba(105, 199, 216, 0.14), transparent 18rem),
+      linear-gradient(135deg, rgba(7, 16, 31, 0.88), rgba(2, 5, 13, 0.94));
+    box-shadow: 0 16px 48px rgba(105, 199, 216, 0.08);
+  }
+
+  .turf-kicker {
+    margin: 0;
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .turf-panel h3 {
+    max-width: 13em;
+    margin: 0.55rem 0 0;
+    font-size: clamp(1.55rem, 5vw, 2.15rem);
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+
+  .turf-lead {
+    max-width: 40rem;
+    margin: 0.85rem 0 0;
+    color: var(--muted);
+    font-size: 14.1px;
+    line-height: 1.8;
+  }
+
+  .turf-points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    border-top: 1px solid rgba(216, 180, 97, 0.2);
+    border-bottom: 1px solid rgba(216, 180, 97, 0.2);
+    list-style: none;
+  }
+
+  .turf-points li {
+    min-width: 0;
+    padding: 1rem;
+  }
+
+  .turf-points li + li {
+    border-left: 1px solid rgba(216, 180, 97, 0.2);
+  }
+
+  .turf-points strong,
+  .turf-points span {
+    display: block;
+  }
+
+  .turf-points strong {
+    color: var(--gold-bright);
+    font-size: 14.1px;
+  }
+
+  .turf-points span {
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 12.2px;
+    line-height: 1.65;
+  }
+
+  .turf-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .turf-bottom p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12.2px;
+    line-height: 1.6;
+  }
+
+  .turf-bottom a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 2.8rem;
+    flex: 0 0 auto;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--cyan);
+    border-radius: 6px;
+    background: rgba(105, 199, 216, 0.12);
+    color: var(--ink);
+    font-size: 14.1px;
+    font-weight: 800;
+    transition: background 180ms var(--ease), transform 180ms var(--ease);
+  }
+
+  .turf-bottom a:hover {
+    background: rgba(105, 199, 216, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .turf-bottom a:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
   }
 
   .mv-feature {
@@ -448,7 +594,7 @@ import { musicVideos, works } from "@/data/works";
     gap: 0.5rem;
     margin: 0 0 1.2rem;
     color: #db7d7d;
-    font-size: 0.58rem;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.12em;
   }
@@ -456,8 +602,8 @@ import { musicVideos, works } from "@/data/works";
   .mv-status span {
     width: 0.5rem;
     height: 0.5rem;
-    border-radius: 50%;
-    background: #d04d4d;
+    border-radius: 6px;
+    background: #d44343;
     box-shadow: 0 0 15px rgba(208, 77, 77, 0.9);
   }
 
@@ -465,7 +611,7 @@ import { musicVideos, works } from "@/data/works";
   .mv-release small {
     margin: 0;
     color: var(--cyan);
-    font-size: 0.56rem;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.14em;
   }
@@ -514,7 +660,7 @@ import { musicVideos, works } from "@/data/works";
   .mv-release p {
     margin: 0.35rem 0 0;
     color: var(--muted);
-    font-size: 0.7rem;
+    font-size: 12.2px;
     line-height: 1.55;
   }
 
@@ -529,15 +675,15 @@ import { musicVideos, works } from "@/data/works";
     align-items: center;
     justify-content: center;
     min-height: 3rem;
-    border-radius: 5px;
-    font-size: 0.75rem;
+    border-radius: 6px;
+    font-size: 14.1px;
     font-weight: 800;
     transition: transform 180ms var(--ease), background 180ms var(--ease), border-color 180ms var(--ease);
   }
 
   .mv-primary {
     gap: 0.6rem;
-    background: #d44343;
+    background: #d23b3b;
     color: #fff;
   }
 
@@ -658,7 +804,7 @@ import { musicVideos, works } from "@/data/works";
   .work-copy p {
     margin: 0 0 0.35rem;
     color: var(--gold);
-    font-size: 0.62rem;
+    font-size: 12.2px;
     font-weight: 700;
   }
 
@@ -676,7 +822,7 @@ import { musicVideos, works } from "@/data/works";
     display: block;
     margin-top: 0.4rem;
     color: var(--muted);
-    font-size: 0.72rem;
+    font-size: 14.1px;
     line-height: 1.45;
   }
 
@@ -692,7 +838,7 @@ import { musicVideos, works } from "@/data/works";
   .status {
     max-width: 5.8rem;
     color: var(--muted);
-    font-size: 0.59rem;
+    font-size: 14.1px;
     line-height: 1.35;
     text-align: right;
   }
@@ -704,7 +850,7 @@ import { musicVideos, works } from "@/data/works";
 
   .work-arrow,
   .arrow {
-    font-size: 1rem;
+    font-size: 16.3px;
   }
 
   .work-arrow {
@@ -748,12 +894,12 @@ import { musicVideos, works } from "@/data/works";
     width: 3.25rem;
     height: 3.25rem;
     color: var(--gold-bright);
-    font-size: 1.2rem;
+    font-size: 16.3px;
   }
 
   .social-icon {
     color: var(--ink);
-    font-size: 0.78rem;
+    font-size: 14.1px;
     font-weight: 800;
   }
 
@@ -771,7 +917,7 @@ import { musicVideos, works } from "@/data/works";
   .link-copy small {
     overflow: hidden;
     color: var(--muted);
-    font-size: 0.7rem;
+    font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -788,13 +934,19 @@ import { musicVideos, works } from "@/data/works";
     padding: 1.25rem 0.15rem 0;
     border-top: 1px solid var(--hairline);
     color: var(--muted);
-    font-size: 0.62rem;
+    font-size: 12.2px;
   }
 
   footer p {
     margin: 0;
     color: var(--ink);
     font-weight: 700;
+  }
+
+  p,
+  li,
+  .work-copy > span {
+    word-break: auto-phrase;
   }
 
   @keyframes hero-drift {
@@ -848,6 +1000,20 @@ import { musicVideos, works } from "@/data/works";
 
     .section {
       margin-top: 2.5rem;
+    }
+
+    .turf-points {
+      grid-template-columns: 1fr;
+    }
+
+    .turf-points li + li {
+      border-top: 1px solid rgba(216, 180, 97, 0.2);
+      border-left: 0;
+    }
+
+    .turf-bottom {
+      align-items: stretch;
+      flex-direction: column;
     }
 
     .mv-body {
