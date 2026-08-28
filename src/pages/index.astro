@@ -77,6 +77,11 @@ import { musicVideos, works } from "@/data/works";
           <li><strong>運気</strong><span>誕生日をもとに、レース時の流れも見る。</span></li>
         </ul>
 
+        <section class="latest-posts" aria-labelledby="latest-posts-title" hidden>
+          <h4 id="latest-posts-title">最新の検証</h4>
+          <div class="latest-post-list"></div>
+        </section>
+
         <div class="turf-bottom">
           <p>現在はβ版として予想と検証を無料配信中。今後、予想販売へ移行します。</p>
           <a href="https://substack.com/@komat6" target="_blank" rel="noreferrer">
@@ -215,6 +220,59 @@ import { musicVideos, works } from "@/data/works";
     </footer>
   </main>
 </BaseLayout>
+
+<script>
+  const latestPosts = document.querySelector(".latest-posts");
+  const latestPostList = latestPosts?.querySelector(".latest-post-list");
+
+  if (latestPosts instanceof HTMLElement && latestPostList instanceof HTMLElement) {
+    const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    fetch("/api/substack-posts", { headers: { Accept: "application/json" } })
+      .then((response) => {
+        if (!response.ok) throw new Error("feed unavailable");
+        return response.json();
+      })
+      .then(({ posts }) => {
+        if (!Array.isArray(posts) || posts.length === 0) return;
+
+        const fragment = document.createDocumentFragment();
+
+        for (const post of posts.slice(0, 3)) {
+          if (!post?.title || !post?.excerpt || !post?.url || !post?.publishedAt) continue;
+
+          const card = document.createElement("a");
+          card.className = "latest-post-card";
+          card.href = post.url;
+          card.target = "_blank";
+          card.rel = "noreferrer";
+
+          const date = document.createElement("time");
+          date.dateTime = post.publishedAt;
+          date.textContent = dateFormatter.format(new Date(post.publishedAt));
+
+          const title = document.createElement("h5");
+          title.textContent = post.title;
+
+          const excerpt = document.createElement("p");
+          excerpt.textContent = post.excerpt;
+
+          card.append(date, title, excerpt);
+          fragment.append(card);
+        }
+
+        if (!fragment.hasChildNodes()) return;
+
+        latestPostList.replaceChildren(fragment);
+        latestPosts.hidden = false;
+      })
+      .catch(() => {});
+  }
+</script>
 
 <style>
   .site-shell {
@@ -447,18 +505,6 @@ import { musicVideos, works } from "@/data/works";
     box-shadow: 0 16px 48px rgba(105, 199, 216, 0.08);
   }
 
-  .turf-panel::after {
-    content: "";
-    display: block;
-    aspect-ratio: 16 / 9;
-    margin-top: 1.5rem;
-    border: 1px dashed rgba(105, 199, 216, 0.32);
-    border-radius: 6px;
-    background:
-      linear-gradient(135deg, rgba(105, 199, 216, 0.06), rgba(2, 5, 13, 0.24)),
-      var(--turf-evidence-image, none) center / cover no-repeat;
-  }
-
   .turf-kicker {
     margin: 0;
     color: var(--cyan);
@@ -518,6 +564,70 @@ import { musicVideos, works } from "@/data/works";
     color: var(--muted);
     font-size: 14.1px;
     line-height: 1.65;
+  }
+
+  .latest-posts {
+    min-width: 0;
+    margin-top: 1.5rem;
+  }
+
+  .latest-posts[hidden] {
+    display: none;
+  }
+
+  .latest-posts h4 {
+    margin: 0;
+    color: var(--cyan);
+    font-size: 14.1px;
+  }
+
+  .latest-post-list {
+    display: grid;
+    min-width: 0;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
+  }
+
+  .latest-post-card {
+    display: grid;
+    min-width: 0;
+    gap: 0.45rem;
+    padding: 1rem;
+    border: 1px solid var(--cyan);
+    border-radius: 6px;
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .latest-post-card:hover {
+    border-color: var(--gold-bright);
+  }
+
+  .latest-post-card:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
+  }
+
+  .latest-post-card time {
+    color: var(--gold);
+    font-size: 12.2px;
+    line-height: 1.4;
+  }
+
+  .latest-post-card h5,
+  .latest-post-card p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 14.1px;
+    overflow-wrap: anywhere;
+  }
+
+  .latest-post-card h5 {
+    line-height: 1.5;
+  }
+
+  .latest-post-card p {
+    line-height: 1.7;
   }
 
   .turf-bottom {
