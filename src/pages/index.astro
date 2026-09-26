@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { musicVideos, works } from "@/data/works";
+import { channels, works } from "@/data/works";
 ---
 
 <BaseLayout>
@@ -30,8 +30,8 @@ import { musicVideos, works } from "@/data/works";
 
       <div class="hero-copy">
         <h1 id="hero-title">KOMAYAN</h1>
-        <p class="role">HORSE RACING FORECAST APP / AI CREATOR</p>
-        <p class="catch">理論とデータを軸に予想する。<br />誕生日から、馬の素質と運気まで見る。</p>
+        <p class="role">HORSE RACING FORECAST APP / AI MUSIC VIDEO</p>
+        <p class="catch">競馬予想アプリと、AIの音楽映像をつくっています。<br />3つのYouTubeチャンネルで、MVを重ねています。</p>
 
         <a
           class="substack-cta"
@@ -63,27 +63,19 @@ import { musicVideos, works } from "@/data/works";
         <span>01</span>
       </div>
 
-      <div class="turf-panel">
+      <div class="turf-panel turf-panel--compact">
         <p class="turf-kicker">RACING FORECAST APP</p>
         <h3 id="turf-title">8割は理論。誕生日から、素質と運気も見る。</h3>
         <p class="turf-lead">
-          星読みターフは、データと独自理論を軸にした競馬予想アプリです。
-          そこに誕生日から見る馬の素質と、レース時の運気を加えて予想します。
+          データと独自理論を軸にした競馬予想アプリ。β版として予想と検証を無料配信中です。
         </p>
-
-        <ul class="turf-points">
-          <li><strong>理論 80%</strong><span>データと独自理論を、予想の中心に置く。</span></li>
-          <li><strong>素質</strong><span>誕生日から、その馬が持つ力の傾向を見る。</span></li>
-          <li><strong>運気</strong><span>誕生日をもとに、レース時の流れも見る。</span></li>
-        </ul>
 
         <section class="latest-posts" aria-labelledby="latest-posts-title" hidden>
           <h4 id="latest-posts-title">最新の検証</h4>
           <div class="latest-post-list"></div>
         </section>
 
-        <div class="turf-bottom">
-          <p>現在はβ版として予想と検証を無料配信中。今後、予想販売へ移行します。</p>
+        <div class="turf-bottom turf-bottom--compact">
           <a href="https://substack.com/@komat6" target="_blank" rel="noreferrer">
             β版を無料購読する <span aria-hidden="true">↗</span>
           </a>
@@ -91,64 +83,77 @@ import { musicVideos, works } from "@/data/works";
       </div>
     </section>
 
-    <section class="section mv-section" aria-labelledby="mv-title">
-      <div class="section-heading">
-        <h2 id="mv-title">Music Video</h2>
-        <span>{String(musicVideos.length + 1).padStart(2, "0")}</span>
-      </div>
-
-      {
-        musicVideos.map((video) => (
-          <article class="mv-feature">
-            <div class="mv-video" style={`--mv-poster: url("${video.image}")`}>
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
-                title={`${video.channel}「${video.title}」ミュージックビデオ`}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              />
+    {
+      channels.map((channel, index) => {
+        const [main, ...others] = channel.videos;
+        return (
+          <section class="section mv-section" aria-labelledby={`${channel.slug}-title`}>
+            <div class="section-heading">
+              <h2 id={`${channel.slug}-title`}>{channel.name}</h2>
+              <span>{String(index + 2).padStart(2, "0")}</span>
             </div>
 
-            <div class="mv-body">
-              <div class="mv-intro">
-                <p class="mv-status"><span aria-hidden="true" />{video.status}</p>
-                <p class="mv-channel">YOUTUBE CHANNEL</p>
-                <h3>{video.channel}</h3>
-                <p class="mv-concept">イズナが歌い、世界を旅する。</p>
-                <p class="mv-description">
-                  キャラクター「イズナ」を主人公に、音楽と映像でひとつの世界を描くプロジェクト。
-                  これから新しいMVを重ねていきます。
-                </p>
+            <article class="mv-feature">
+              <div class="mv-video" style={`--mv-poster: url("${channel.image}")`}>
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${main.youtubeId}`}
+                  title={`${channel.name}「${main.title}」ミュージックビデオ`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                />
               </div>
 
-              <div class="mv-release">
-                <div>
-                  <small>1ST MUSIC VIDEO</small>
-                  <strong>『{video.title}』</strong>
-                  <p>{video.line}</p>
+              <div class="mv-body">
+                <div class="mv-intro">
+                  {channel.status && (
+                    <p class="mv-status"><span aria-hidden="true" />{channel.status}</p>
+                  )}
+                  <p class="mv-channel">YOUTUBE CHANNEL / {channel.kicker}</p>
+                  <h3>{channel.name}</h3>
+                  <p class="mv-concept">{channel.concept}</p>
+                  <p class="mv-description">{channel.description}</p>
                 </div>
-                <div class="mv-actions">
-                  <a class="mv-primary" href={video.href} target="_blank" rel="noreferrer">
-                    <span aria-hidden="true">▶</span>
-                    YouTubeで観る
-                  </a>
-                  <a class="mv-secondary" href={video.channelHref} target="_blank" rel="noreferrer">
-                    チャンネルを見る <span aria-hidden="true">↗</span>
-                  </a>
+
+                <div class="mv-release">
+                  <div>
+                    <small>LATEST</small>
+                    <strong>『{main.title}』</strong>
+                    {main.line && <p>{main.line}</p>}
+                    {others.length > 0 && (
+                      <ul class="mv-others" aria-label="ほかのMV">
+                        {others.map((video) => (
+                          <li>
+                            <a href={`https://youtu.be/${video.youtubeId}`} target="_blank" rel="noreferrer">
+                              <span aria-hidden="true">▶</span> {video.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <div class="mv-actions">
+                    <a class="mv-primary" href={`https://youtu.be/${main.youtubeId}`} target="_blank" rel="noreferrer">
+                      <span aria-hidden="true">▶</span>
+                      YouTubeで観る
+                    </a>
+                    <a class="mv-secondary" href={channel.href} target="_blank" rel="noreferrer">
+                      チャンネルを見る <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        ))
-      }
-    </section>
+            </article>
+          </section>
+        );
+      })
+    }
 
     <section class="section works-section" aria-labelledby="works-title">
       <div class="section-heading">
         <h2 id="works-title">Works</h2>
-        <span>{String(works.length + 1).padStart(2, "0")}</span>
+        <span>{String(channels.length + 2).padStart(2, "0")}</span>
       </div>
 
       <div class="work-list">
@@ -196,11 +201,15 @@ import { musicVideos, works } from "@/data/works";
           <span class="link-copy"><strong>Substack</strong><small>無料ニュースレター</small></span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="link-item youtube-link" href="https://www.youtube.com/@izuna-6" target="_blank" rel="noreferrer">
-          <span class="link-icon youtube-icon" aria-hidden="true">▶</span>
-          <span class="link-copy"><strong>YouTube</strong><small>量子論 イズナ</small></span>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
+        {
+          channels.map((channel) => (
+            <a class="link-item youtube-link" href={channel.href} target="_blank" rel="noreferrer">
+              <span class="link-icon youtube-icon" aria-hidden="true">▶</span>
+              <span class="link-copy"><strong>YouTube</strong><small>{channel.name}</small></span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          ))
+        }
         <a class="link-item" href="https://x.com/komatobideepwin" target="_blank" rel="noreferrer">
           <span class="link-icon social-icon" aria-hidden="true">X</span>
           <span class="link-copy"><strong>X</strong><small>@komatobideepwin</small></span>
@@ -215,7 +224,7 @@ import { musicVideos, works } from "@/data/works";
     </section>
 
     <footer>
-      <p>KOMAYAN / QUANTUM THEORY IZUNA</p>
+      <p>KOMAYAN / KS-OVER / IZUNA PARADOX / GLUCOSEMAN</p>
       <span>© {new Date().getFullYear()} KOMAYAN</span>
     </footer>
   </main>
@@ -670,6 +679,44 @@ import { musicVideos, works } from "@/data/works";
   .turf-bottom a:focus-visible {
     outline: 2px solid var(--gold-bright);
     outline-offset: 3px;
+  }
+
+  .turf-panel--compact .turf-lead {
+    margin-bottom: 0;
+  }
+
+  .turf-bottom--compact {
+    margin-top: 1.25rem;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .mv-section + .mv-section {
+    margin-top: clamp(2.5rem, 8vw, 4rem);
+  }
+
+  .mv-others {
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .mv-others a {
+    color: var(--muted);
+    font-size: 14.1px;
+    line-height: 1.5;
+  }
+
+  .mv-others a:hover {
+    color: var(--ink);
+  }
+
+  .mv-others span {
+    color: #d23b3b;
+    font-size: 0.7em;
+    margin-right: 0.15rem;
   }
 
   .mv-feature {
